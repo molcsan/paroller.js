@@ -1,20 +1,4 @@
-/**
- * jQuery plugin paroller.js v1.4.7
- * https://github.com/tgomilar/paroller.js
- * preview: https://tgomilar.github.io/paroller/
- * author: Tanja Gomilar
- **/
-(function (factory) {
-    'use strict';
-    if (typeof define === 'function' && define.amd) {
-        define('parollerjs', ['jquery'], factory);
-    } else if (typeof module === 'object' && typeof module.exports === 'object') {
-        module.exports = factory(require('jquery'));
-    }
-    else {
-        factory(jQuery);
-    }
-})(function ($) {
+function init($) {
     'use strict';
 
     var working = false;
@@ -225,4 +209,6 @@
             });
         });
     };
-});
+}
+
+export default init;
