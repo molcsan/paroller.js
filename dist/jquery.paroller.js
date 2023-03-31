@@ -1,12 +1,10 @@
 function init($) {
-    'use strict';
-
-    var working = false;
-    var scrollAction = function() {
+    let working = false;
+    const scrollAction = function () {
         working = false;
     };
 
-    var setDirection = {
+    const setDirection = {
         bgVertical: function (elem, bgOffset) {
             return elem.css({'background-position': 'center ' + -bgOffset + 'px'});
         },
@@ -35,32 +33,29 @@ function init($) {
         }
     };
 
-    var setMovement = {
+    const setMovement = {
         factor: function (elem, width, options) {
-            var dataFactor = elem.data('paroller-factor');
-            var factor = (dataFactor) ? dataFactor : options.factor;
+            const dataFactor = elem.data('paroller-factor');
+            const factor = (dataFactor) ? dataFactor : options.factor;
             if (width < 576) {
-                var dataFactorXs = elem.data('paroller-factor-xs');
-                var factorXs = (dataFactorXs) ? dataFactorXs : options.factorXs;
+                const dataFactorXs = elem.data('paroller-factor-xs');
+                const factorXs = (dataFactorXs) ? dataFactorXs : options.factorXs;
                 return (factorXs) ? factorXs : factor;
-            }
-            else if (width <= 768) {
-                var dataFactorSm = elem.data('paroller-factor-sm');
-                var factorSm = (dataFactorSm) ? dataFactorSm : options.factorSm;
+            } else if (width <= 768) {
+                const dataFactorSm = elem.data('paroller-factor-sm');
+                const factorSm = (dataFactorSm) ? dataFactorSm : options.factorSm;
                 return (factorSm) ? factorSm : factor;
-            }
-            else if (width <= 1024) {
-                var dataFactorMd = elem.data('paroller-factor-md');
-                var factorMd = (dataFactorMd) ? dataFactorMd : options.factorMd;
+            } else if (width <= 1024) {
+                const dataFactorMd = elem.data('paroller-factor-md');
+                const factorMd = (dataFactorMd) ? dataFactorMd : options.factorMd;
                 return (factorMd) ? factorMd : factor;
-            }
-            else if (width <= 1200) {
-                var dataFactorLg = elem.data('paroller-factor-lg');
-                var factorLg = (dataFactorLg) ? dataFactorLg : options.factorLg;
+            } else if (width <= 1200) {
+                const dataFactorLg = elem.data('paroller-factor-lg');
+                const factorLg = (dataFactorLg) ? dataFactorLg : options.factorLg;
                 return (factorLg) ? factorLg : factor;
             } else if (width <= 1920) {
-                var dataFactorXl = elem.data('paroller-factor-xl');
-                var factorXl = (dataFactorXl) ? dataFactorXl : options.factorXl;
+                const dataFactorXl = elem.data('paroller-factor-xl');
+                const factorXl = (dataFactorXl) ? dataFactorXl : options.factorXl;
                 return (factorXl) ? factorXl : factor;
             } else {
                 return factor;
@@ -74,21 +69,21 @@ function init($) {
         }
     };
 
-    var clearPositions = {
+    const clearPositions = {
         background: function (elem) {
             return elem.css({'background-position': 'unset'});
         },
         foreground: function (elem) {
             return elem.css({
-                'transform' : 'unset',
-                'transition' : 'unset'
+                'transform': 'unset',
+                'transition': 'unset'
             });
         }
     };
 
     $.fn.paroller = function (options) {
-        var windowHeight = $(window).height();
-        var documentHeight = $(document).height();
+        const windowHeight = $(window).height();
+        const documentHeight = $(document).height();
 
         // default options
         var options = $.extend({
@@ -104,22 +99,22 @@ function init($) {
         }, options);
 
         return this.each(function () {
-            var $this = $(this);
-            var width = $(window).width();
-            var offset = $this.offset().top;
-            var height = $this.outerHeight();
+            const $this = $(this);
+            let width = $(window).width();
+            let offset = $this.offset().top;
+            let height = $this.outerHeight();
 
-            var dataType = $this.data('paroller-type');
-            var dataDirection = $this.data('paroller-direction');
-            var dataTransition = $this.data('paroller-transition');
-            var oldTransform = $this.css('transform');
+            const dataType = $this.data('paroller-type');
+            const dataDirection = $this.data('paroller-direction');
+            const dataTransition = $this.data('paroller-transition');
+            const oldTransform = $this.css('transform');
 
-            var transition = (dataTransition) ? dataTransition : options.transition;
-            var type = (dataType) ? dataType : options.type;
-            var direction = (dataDirection) ? dataDirection : options.direction;
-            var factor = 0;
-            var bgOffset = setMovement.bgOffset(offset, factor);
-            var transform = setMovement.transform(offset, factor, windowHeight, height);
+            const transition = (dataTransition) ? dataTransition : options.transition;
+            const type = (dataType) ? dataType : options.type;
+            const direction = (dataDirection) ? dataDirection : options.direction;
+            let factor = 0;
+            let bgOffset = setMovement.bgOffset(offset, factor);
+            let transform = setMovement.transform(offset, factor, windowHeight, height);
 
             if (type === 'background') {
                 if (direction === 'vertical') {
@@ -139,7 +134,7 @@ function init($) {
             }
 
             $(window).on('resize', function () {
-                var scrolling = $(this).scrollTop();
+                const scrolling = $(this).scrollTop();
                 width = $(window).width();
                 offset = $this.offset().top;
                 height = $this.outerHeight();
@@ -173,8 +168,8 @@ function init($) {
             });
 
             $(window).on('scroll', function () {
-                var scrolling = $(this).scrollTop();
-                var scrollTop = $(document).scrollTop();
+                const scrolling = $(this).scrollTop();
+                const scrollTop = $(document).scrollTop();
 
                 if (scrollTop === 0) {
                     factor = 0;
